@@ -2,18 +2,16 @@ import express, { application } from 'express';
 import bodyParser from 'body-parser';
 import mongoose  from 'mongoose';
 import cors from 'cors';
-import studentRoutes from './routes/student.js'; 
+import studentRoutes from './routes/student.js';
+import homeRouter from './routes/home.js'; 
 
 const app = express();
-
-app.use('/students', studentRoutes);
-
-
 app.use(bodyParser.json({limit:"20mb", extended:true}));
 app.use(bodyParser.urlencoded({limit:"20mb", extended:true}));
-
 app.use(cors());
 
+app.use('/students', studentRoutes);
+app.use('/', homeRouter);
 
 const CONNECTION_URL = 'mongodb+srv://skillsBuild:123password@cluster0.d8c9b.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
 
